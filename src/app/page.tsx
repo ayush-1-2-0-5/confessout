@@ -1,101 +1,67 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link'
+import { Button } from '../../components/ui/button'
+import { Card } from '../../components/ui/card'
+import { ArrowRight, Lock, Mail, Clock } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
+      <header className="container mx-auto px-4 py-8">
+        <nav className="flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold text-purple-800">Confess Out</Link>
+          <div className="space-x-4">
+            <Link href="/about" className="text-purple-800 hover:text-purple-600">About</Link>
+            <Link href="/why" className="text-purple-800 hover:text-purple-600">Why Confess?</Link>
+          </div>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      <main className="container mx-auto px-4 py-16">
+        <section className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-purple-900 mb-4">Welcome to Confess Out</h1>
+          <p className="text-xl text-purple-700 mb-8">Because life is too short for hidden truths.</p>
+          <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg">
+            Start Confessing
+          </Button>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-6 bg-white shadow-lg rounded-lg">
+              <Mail className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl  text-black font-semibold mb-2">Anonymous Confession</h3>
+              <p className="text-gray-600">Send your confession anonymously by providing the recipient's email, name, and phone number.</p>
+            </Card>
+            <Card className="p-6 bg-white shadow-lg rounded-lg">
+              <Lock className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl  text-black font-semibold mb-2">Secure Delivery</h3>
+              <p className="text-gray-600">We encrypt all information and use secure algorithms to protect your privacy.</p>
+            </Card>
+            <Card className="p-6 bg-white shadow-lg rounded-lg">
+              <Clock className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl text-black font-semibold mb-2">Timed Access</h3>
+              <p className="text-gray-600">Recipients can view the confession for a limited time set by the sender.</p>
+            </Card>
+          </div>
+        </section>
+
+        <section className="text-center">
+          <h2 className="text-3xl font-semibold text-purple-800 mb-4">Ready to Confess?</h2>
+          <p className="text-xl text-purple-700 mb-8">Take the first step towards honesty and healing.</p>
+          <Button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg">
+            Get Started <ArrowRight className="ml-2" />
+          </Button>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-purple-900 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 Confess Out. All rights reserved.</p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
