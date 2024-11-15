@@ -1,19 +1,30 @@
 'use client';
-
-import Link from 'next/link'
-import { Button } from '../../components/ui/button'
-import { Card } from '../../components/ui/card'
-import { ArrowRight, Lock, Mail, Clock } from 'lucide-react'
+import Link from 'next/link';
+import { Button } from '../../components/ui/button';
+import { Card } from '../../components/ui/card';
+import { ArrowRight, Lock, Mail, Clock } from 'lucide-react';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
-      <header className="container mx-auto px-4 py-8">
+      <header className="container mx-auto px-4 py-6 border-b border-purple-300">
         <nav className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-purple-800">Confess Out</Link>
-          <div className="space-x-4">
-            <Link href="/about" className="text-purple-800 hover:text-purple-600">About</Link>
-            <Link href="/why" className="text-purple-800 hover:text-purple-600">Why Confess?</Link>
+          <Link href="/" className="text-3xl font-bold text-purple-800">
+            Confess Out
+          </Link>
+          <div className="flex space-x-6 items-center">
+            <Link href="/about" className="text-purple-800 font-bold hover:text-purple-600">
+              About
+            </Link>
+            <Link href="/why" className="text-purple-800 font-bold hover:text-purple-600">
+              Why Confess?
+            </Link>
+            <Link
+              href="/gotoyourconfession"
+              className="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition"
+            >
+              See Your Confession
+            </Link>
           </div>
         </nav>
       </header>
@@ -32,18 +43,24 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6 bg-white shadow-lg rounded-lg">
               <Mail className="w-12 h-12 text-purple-600 mb-4" />
-              <h3 className="text-xl  text-black font-semibold mb-2">Anonymous Confession</h3>
-              <p className="text-gray-600">Send your confession anonymously by providing the recipient's email, name, and phone number.</p>
+              <h3 className="text-xl text-black font-semibold mb-2">Anonymous Confession</h3>
+              <p className="text-gray-600">
+                Send your confession anonymously by providing the recipient's email, name, and phone number.
+              </p>
             </Card>
             <Card className="p-6 bg-white shadow-lg rounded-lg">
               <Lock className="w-12 h-12 text-purple-600 mb-4" />
-              <h3 className="text-xl  text-black font-semibold mb-2">Secure Delivery</h3>
-              <p className="text-gray-600">We encrypt all information and use secure algorithms to protect your privacy.</p>
+              <h3 className="text-xl text-black font-semibold mb-2">Secure Delivery</h3>
+              <p className="text-gray-600">
+                We encrypt all information and use secure algorithms to protect your privacy.
+              </p>
             </Card>
             <Card className="p-6 bg-white shadow-lg rounded-lg">
               <Clock className="w-12 h-12 text-purple-600 mb-4" />
               <h3 className="text-xl text-black font-semibold mb-2">Timed Access</h3>
-              <p className="text-gray-600">Recipients can view the confession for a limited time set by the sender.</p>
+              <p className="text-gray-600">
+                Recipients can view the confession for a limited time set by the sender.
+              </p>
             </Card>
           </div>
         </section>
@@ -63,5 +80,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

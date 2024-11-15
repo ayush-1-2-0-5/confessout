@@ -4,14 +4,15 @@ import { verifyOTP, getStoredOTP } from '../../../../lib/twilio';
 export async function POST(request: Request) {
   try {
     const { phoneNumber, otp } = await request.json();
+    console.log(phoneNumber)
+    console.log(otp)
 
-    // Ensure storedOTP is retrieved properly
     const storedOTP = await getStoredOTP(phoneNumber);
     console.log(`Verifying OTP for ${phoneNumber}: Stored OTP: ${storedOTP}, Provided OTP: ${otp}`);
 
-    // Direct comparison
-    const isValid = storedOTP === otp;
-
+    const isValid = storedOTP === String(otp);
+    console.log(isValid)
+   
     if (isValid) {
       return NextResponse.json({ message: 'OTP verified successfully' }, { status: 200 });
     } else {

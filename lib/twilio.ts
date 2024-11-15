@@ -75,15 +75,15 @@ export async function verifyOTP(phoneNumber: string, otp: string): Promise<boole
         return false;
       }
   
-      const isValid = storedOTP === otp; // Compare the OTPs
+      const isValid = storedOTP === otp;
   
       if (isValid) {
         console.log(`OTP verified successfully for ${normalizedNumber}`);
-        await redis.del(`otp:${normalizedNumber}`); // Delete OTP from Redis after verification
+        await redis.del(`otp:${normalizedNumber}`); 
       } else {
         console.log(`Invaid OTP provided for ${normalizedNumber}`);
       }
-      return isValid; // Return true if the OTPs match
+      return isValid; 
     } catch (error) {
       console.error('Error verifying OTP:', error);
       return false;

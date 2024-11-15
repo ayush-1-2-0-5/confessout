@@ -1,29 +1,34 @@
 'use client';
-
-import Link from 'next/link'
-import { Shield, Key, Trash2 } from 'lucide-react'
+import Link from 'next/link';
+import { Shield, Key, Trash2 } from 'lucide-react';
 
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
-      <header className="container mx-auto px-4 py-8">
+      <header className="container mx-auto px-4 py-8 border-b border-purple-600">
         <nav className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-purple-800">Confess Out</Link>
-          <div className="space-x-4">
-            <Link href="/" className="text-purple-800 hover:text-purple-600">Home</Link>
-            <Link href="/why" className="text-purple-800 hover:text-purple-600">Why Confess?</Link>
+          <Link href="/" className="text-4xl font-bold text-purple-800 hover:text-purple-600 transition">
+            Confess Out
+          </Link>
+          <div className="space-x-8">
+            <Link href="/" className="text-purple-800 font-bold hover:text-purple-600 transition">
+              Home
+            </Link>
+            <Link href="/why" className="text-purple-800 font-bold hover:text-purple-600 transition">
+              Why Confess?
+            </Link>
           </div>
         </nav>
       </header>
 
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-6 py-16">
         <h1 className="text-4xl font-bold text-purple-900 mb-8 text-center">About Confess Out</h1>
-        
+
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            At Confess Out, we believe in the power of honesty and the healing that comes from sharing our truths. 
-            Our mission is to provide a safe, secure, and anonymous platform for people to express their deepest 
+            At Confess Out, we believe in the power of honesty and the healing that comes from sharing our truths.
+            Our mission is to provide a safe, secure, and anonymous platform for people to express their deepest
             thoughts and confessions.
           </p>
         </section>
@@ -52,8 +57,7 @@ export default function About() {
         <section>
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">Our Commitment</h2>
           <p className="text-gray-700 mb-4">
-            We are committed to maintaining the highest standards of privacy and security. Our team continuously 
-            works to improve our systems and ensure that your confessions remain confidential and protected.
+            We are committed to maintaining the highest standards of privacy and security. Our team continuously works to improve our systems and ensure that your confessions remain confidential and protected.
           </p>
         </section>
       </main>
@@ -64,5 +68,5 @@ export default function About() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
