@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';
 import { ArrowRight, Lock, Mail, Clock } from 'lucide-react';
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
@@ -28,7 +27,6 @@ export default function Home() {
           </div>
         </nav>
       </header>
-
       <main className="container mx-auto px-4 py-16">
         <section className="text-center mb-16">
           <h1 className="text-5xl font-bold text-purple-900 mb-4">Welcome to Confess Out</h1>
@@ -37,7 +35,6 @@ export default function Home() {
             Start Confessing
           </Button>
         </section>
-
         <section className="mb-16">
           <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -64,16 +61,14 @@ export default function Home() {
             </Card>
           </div>
         </section>
-
         <section className="text-center">
           <h2 className="text-3xl font-semibold text-purple-800 mb-4">Ready to Confess?</h2>
           <p className="text-xl text-purple-700 mb-8">Take the first step towards honesty and healing.</p>
-          <Button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg">
-            Get Started <ArrowRight className="ml-2" />
+          <Button className="bg-pink-500 hover:bg-pink-600 text-white items-center px-8 py-3 rounded-full text-lg">
+            Get Started <ArrowRight className="ml-8 items-center" />
           </Button>
         </section>
       </main>
-
       <footer className="bg-purple-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2024 Confess Out. All rights reserved.</p>

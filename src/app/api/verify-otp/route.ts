@@ -6,12 +6,13 @@ export async function POST(request: Request) {
     const { phoneNumber, otp } = await request.json();
     console.log(phoneNumber)
     console.log(otp)
-
     const storedOTP = await getStoredOTP(phoneNumber);
     console.log(`Verifying OTP for ${phoneNumber}: Stored OTP: ${storedOTP}, Provided OTP: ${otp}`);
-
-    const isValid = storedOTP === String(otp);
-    console.log(isValid)
+    const isValid = Number(storedOTP) === Number(otp);
+   
+    console.log(typeof Number(storedOTP));
+    console.log(typeof Number(otp));       
+    console.log(isValid);
    
     if (isValid) {
       return NextResponse.json({ message: 'OTP verified successfully' }, { status: 200 });

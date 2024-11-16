@@ -6,7 +6,6 @@ interface TwilioConfig {
   authToken: string;
   phoneNumber: string;
 }
-
 const twilioConfig: TwilioConfig = {
   accountSid: process.env.TWILIO_ACCOUNT_SID!,
   authToken: process.env.TWILIO_AUTH_TOKEN!,
@@ -46,8 +45,6 @@ export async function sendOTP(phoneNumber: string): Promise<string> {
     const normalizedNumber = normalizePhoneNumber(phoneNumber);
     const twilioFormattedNumber = formatPhoneNumberForTwilio(phoneNumber);
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-    // Store OTP in Redis with 5 minutes expiration
     await redis.set(`otp:${normalizedNumber}`, otp, { ex: 300 });
 
     await client.messages.create({
@@ -74,8 +71,11 @@ export async function verifyOTP(phoneNumber: string, otp: string): Promise<boole
         console.log(`No OTP found for ${normalizedNumber}`);
         return false;
       }
+
   
       const isValid = storedOTP === otp;
+      console.log(typeof(storedOTP))
+      console.log(typeof(otp))
   
       if (isValid) {
         console.log(`OTP verified successfully for ${normalizedNumber}`);

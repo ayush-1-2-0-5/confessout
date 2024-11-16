@@ -1,6 +1,6 @@
 'use client';
+
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
@@ -14,10 +14,12 @@ export default function SignIn() {
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSendOTP = async () => {
     setIsLoading(true);
+    setError('');
     try {
       const response = await fetch('/api/send-otp', {
         method: 'POST',
@@ -31,7 +33,7 @@ export default function SignIn() {
 
       setOtpSent(true);
     } catch (error) {
-      console.error('Error sending OTP:', error);
+      setError('Error sending OTP. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -40,34 +42,44 @@ export default function SignIn() {
   const handleVerifyOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
     try {
-      const verifyResponse = await fetch('/api/verify-otp', {
+      // First, verify the OTP
+      const otpResponse = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phoneNumber, otp }),
       });
 
-      if (!verifyResponse.ok) {
-        throw new Error('OTP verification failed');
+      if (!otpResponse.ok) {
+        throw new Error('Invalid OTP');
       }
 
-      const result = await signIn('credentials', {
-        redirect: false,
-        sessionName,
-        password,
-        phoneNumber,
-        otp,
+      // If OTP is valid, proceed with authentication
+      const authResponse = await fetch('/api/authenticate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionName, password, phoneNumber }),
       });
 
-      if (result?.error) {
-        throw new Error(result.error);
+      if (!authResponse.ok) {
+        throw new Error('Authentication failed');
       }
 
-      if (result?.ok) {
-        router.push(`/confession/123123`);
+      // If authentication is successful, set session and navigate to the confession page
+      const sessionResponse = await fetch('/api/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionName }),
+      });
+
+      if (!sessionResponse.ok) {
+        throw new Error('Failed to create session');
       }
+
+      router.push(`/confession/${sessionName}`);
     } catch (error) {
-      console.error('Error verifying OTP:', error);
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -75,15 +87,16 @@ export default function SignIn() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-6">
-      <Card className="w-full max-w-lg"> {/* Increased max-width for larger container */}
+      <Card className="w-full max-w-lg bg-white shadow-xl">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center text-indigo-800">Access Your Confession</CardTitle> {/* Increased font size */}
+          <CardTitle className="text-3xl font-bold text-center text-indigo-800">Access Your Confession</CardTitle>
           <CardDescription className="text-center text-indigo-700">Enter your credentials to view your confession</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="bg-white p-6 rounded-lg shadow-xl"> {/* Increased padding and shadow */}
-            <form onSubmit={handleVerifyOTP} className="space-y-6"> {/* Increased space between form elements */}
-              <div className="space-y-4"> {/* Increased space between input groups */}
+          {!otpSent ? (
+            // Step 1: Initial Form with Send OTP
+            <form onSubmit={(e) => { e.preventDefault(); handleSendOTP(); }} className="space-y-6">
+              <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="sessionName">Session Name</Label>
                   <Input
@@ -92,10 +105,8 @@ export default function SignIn() {
                     value={sessionName}
                     onChange={(e) => setSessionName(e.target.value)}
                     required
-                    className="text-lg p-3" 
                   />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
@@ -105,10 +116,8 @@ export default function SignIn() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="text-lg p-3"  
                   />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="phoneNumber">Phone Number</Label>
                   <Input
@@ -118,45 +127,51 @@ export default function SignIn() {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
-                    className="text-lg p-3"  
                   />
                 </div>
               </div>
-
-              {!otpSent ? (
-                <Button
-                  type="button"
-                  onClick={handleSendOTP}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white transition-colors duration-300 py-3 text-lg"  
+              <Button 
+                type="submit" 
+                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Sending OTP...' : 'Send OTP'}
+              </Button>
+            </form>
+          ) : (
+            // Step 2: OTP Verification Form
+            <form onSubmit={handleVerifyOTP} className="space-y-6">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="otp">Enter OTP</Label>
+                  <Input
+                    id="otp"
+                    type="text"
+                    placeholder="Enter the OTP sent to your phone"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-indigo-600 hover:bg-indigo-700"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Sending OTP...' : 'Send OTP'}
+                  {isLoading ? 'Verifying...' : 'Verify OTP'}
                 </Button>
-              ) : (
-                <>
-                  <div className="space-y-2">
-                    <Label htmlFor="otp">OTP</Label>
-                    <Input
-                      id="otp"
-                      type="text"
-                      placeholder="Enter OTP sent to your phone"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      required
-                      className="text-lg p-3" 
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full bg-pink-500 hover:bg-pink-600 text-white transition-colors duration-300 py-3 text-lg"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? 'Verifying...' : 'Access Confession'}
-                  </Button>
-                </>
-              )}
+                <Button 
+                  type="button" 
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setOtpSent(false)}
+                >
+                  Back to Details
+                </Button>
+              </div>
             </form>
-          </div>
+          )}
+          {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         </CardContent>
       </Card>
     </div>
