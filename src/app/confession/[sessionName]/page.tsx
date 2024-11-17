@@ -11,7 +11,6 @@ interface Confession {
   id: number;
   confession: string;
 }
-
 export default function ConfessionPage() {
   const { sessionName } = useParams();
   const router = useRouter();
@@ -26,22 +25,34 @@ export default function ConfessionPage() {
     const checkAuth = async () => {
       try {
         const response = await fetch('/api/check-auth');
-        console.log(response)
         if (response.ok) {
-          setIsAuthenticated(true);
-          console.log(isAuthenticated)
+          const { sessionName: authSessionName } = await response.json();
+          if (authSessionName === sessionName) {
+            setIsAuthenticated(true);
+          } else {
+            router.push('/gotoyourconfession');
+          }
         } else {
-          router.push('/signin');
+          router.push('/gotoyourconfession');
         }
       } catch (error) {
         console.error('Auth check failed:', error);
-        router.push('/signin');
+        router.push('/gotoyourconfession');
       }
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, sessionName]);
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/session', { method: 'DELETE' });
+      localStorage.removeItem('sessionToken');
+      router.push('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   useEffect(() => {
     if (!sessionName || !isAuthenticated) return;
 
@@ -65,7 +76,6 @@ export default function ConfessionPage() {
         setIsLoading(false);
       }
     };
-
     fetchConfessions();
   }, [sessionName, router, isAuthenticated]);
 
@@ -90,17 +100,8 @@ export default function ConfessionPage() {
     alert('Thank you for sharing your thoughts!');
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/session', { method: 'DELETE' });
-      router.push('/');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  };
-
   if (!isAuthenticated) {
-    return null; // or a loading indicator
+    return null;
   }
 
   if (isLoading) {
@@ -110,7 +111,6 @@ export default function ConfessionPage() {
   if (error) {
     return <div className="text-center py-12 text-indigo-700">{error}</div>;
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">

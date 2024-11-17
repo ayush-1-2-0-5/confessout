@@ -1,10 +1,17 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import redis from '../../../../lib/redis';
+import { v4 as uuidv4 } from 'uuid';
+
 export async function POST(request: Request) {
   const { sessionName } = await request.json();
-  const sessionToken = Buffer.from(sessionName).toString('base64');
-  const response = NextResponse.json({ message: 'Session created' });
-  response.cookies.set('session', sessionToken, {
+  const sessionToken = uuidv4();
+
+  await redis.set(`session:${sessionToken}`, sessionName, { ex: 3600 });
+
+  const response = NextResponse.json({ message: 'Session created', sessionToken });
+  const cookieStore = await cookies();
+  cookieStore.set('sessionToken', sessionToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -15,12 +22,16 @@ export async function POST(request: Request) {
   return response;
 }
 
-// DELETE - Delete the session cookie
 export async function DELETE() {
-  const response = NextResponse.json({ message: 'Session deleted' });
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get('sessionToken')?.value;
 
-  // Delete the session cookie by setting it with an expired date
-  response.cookies.delete('session');
+  if (sessionToken) {
+    await redis.del(`session:${sessionToken}`);
+  }
+
+  const response = NextResponse.json({ message: 'Session deleted' });
+  cookieStore.delete('sessionToken');
 
   return response;
 }

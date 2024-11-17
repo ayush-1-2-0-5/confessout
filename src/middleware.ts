@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const session = request.cookies.get('session')
+  const sessionToken = request.cookies.get('sessionToken')
   
-  if (!session && request.nextUrl.pathname.startsWith('/confession')) {
-    return NextResponse.redirect(new URL('/signin', request.url))
+  if (!sessionToken && request.nextUrl.pathname.startsWith('/confession')) {
+    return NextResponse.redirect(new URL('/gotoyourconfession', request.url))
   }
 
   return NextResponse.next()

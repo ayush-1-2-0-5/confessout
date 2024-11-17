@@ -44,18 +44,16 @@ export default function SignIn() {
     setIsLoading(true);
     setError('');
     try {
-      // First, verify the OTP
       const otpResponse = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phoneNumber, otp }),
       });
-
+      
       if (!otpResponse.ok) {
         throw new Error('Invalid OTP');
       }
 
-      // If OTP is valid, proceed with authentication
       const authResponse = await fetch('/api/authenticate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -66,7 +64,6 @@ export default function SignIn() {
         throw new Error('Authentication failed');
       }
 
-      // If authentication is successful, set session and navigate to the confession page
       const sessionResponse = await fetch('/api/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -77,8 +74,14 @@ export default function SignIn() {
         throw new Error('Failed to create session');
       }
 
-      router.push(`/confession/${sessionName}`);
+      const { sessionToken } = await sessionResponse.json();
+      localStorage.setItem('sessionToken', sessionToken);
+
+      console.log('Navigation starting...');
+      window.location.href = `/confession/${sessionName}`;
+      console.log('Navigation completed');
     } catch (error) {
+      console.error('Error during sign-in process:', error);
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
