@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  sessionName  String       @unique
+  password     String
+  phoneNumber  String
+  confessions  Confession[]
+}
+
+model Confession {
+  id           Int    @id @default(autoincrement())
+  confession   String
+  user         User   @relation(fields: [sessionName], references: [sessionName])
+  sessionName  String
+}

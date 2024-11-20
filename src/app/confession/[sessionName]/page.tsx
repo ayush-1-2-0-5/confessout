@@ -40,7 +40,6 @@ export default function ConfessionPage() {
         router.push('/gotoyourconfession');
       }
     };
-
     checkAuth();
   }, [router, sessionName]);
 
@@ -55,7 +54,6 @@ export default function ConfessionPage() {
   };
   useEffect(() => {
     if (!sessionName || !isAuthenticated) return;
-
     const fetchConfessions = async () => {
       try {
         const response = await fetch(`/api/get-confession?sessionName=${sessionName}`);
@@ -67,6 +65,7 @@ export default function ConfessionPage() {
           throw new Error('Failed to fetch confessions');
         }
         const data = await response.json();
+        console.log(data);
         setConfessionPages(data);
         setThoughts(Array(data.length).fill(''));
         setError(null);
@@ -103,11 +102,9 @@ export default function ConfessionPage() {
   if (!isAuthenticated) {
     return null;
   }
-
   if (isLoading) {
     return <div className="text-center py-12 text-indigo-700">Loading your confessions...</div>;
   }
-
   if (error) {
     return <div className="text-center py-12 text-indigo-700">{error}</div>;
   }

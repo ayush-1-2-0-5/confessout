@@ -8,7 +8,6 @@ export async function POST(request: Request) {
   const sessionToken = uuidv4();
 
   await redis.set(`session:${sessionToken}`, sessionName, { ex: 3600 });
-
   const response = NextResponse.json({ message: 'Session created', sessionToken });
   const cookieStore = await cookies();
   cookieStore.set('sessionToken', sessionToken, {
@@ -25,13 +24,10 @@ export async function POST(request: Request) {
 export async function DELETE() {
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value;
-
   if (sessionToken) {
     await redis.del(`session:${sessionToken}`);
   }
-
   const response = NextResponse.json({ message: 'Session deleted' });
   cookieStore.delete('sessionToken');
-
   return response;
 }
