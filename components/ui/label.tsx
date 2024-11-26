@@ -1,17 +1,20 @@
-
-import * as React from "react";
-import { cn } from "../../lib/utils"; // Make sure you have the `cn` utility for conditional class names
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
 
-export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, ...props }, ref) => (
     <label
       ref={ref}
-      className={cn("text-sm font-medium text-gray-700", className)}
+      className={cn(
+        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        className
+      )}
       {...props}
     />
   )
-);
+)
+Label.displayName = "Label"
 
-Label.displayName = "Label";
+export { Label }
