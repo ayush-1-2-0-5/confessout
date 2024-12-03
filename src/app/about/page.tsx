@@ -27,7 +27,7 @@ export default function About() {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            At Confess Out, we believe in the power of honesty and the healing that comes from sharing our truths.
+            At ConfessOut, we believe in the power of honesty and the healing that comes from sharing our truths.
             Our mission is to provide a safe, secure, and anonymous platform for people to express their deepest
             thoughts and confessions.
           </p>
