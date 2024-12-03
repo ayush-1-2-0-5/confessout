@@ -76,7 +76,6 @@ export default function SignIn() {
 
       const { sessionToken } = await sessionResponse.json();
       localStorage.setItem('sessionToken', sessionToken);
-
       console.log('Navigation starting...');
       window.location.href = `/confession/${sessionName}`;
       console.log('Navigation completed');
@@ -101,32 +100,35 @@ export default function SignIn() {
             <form onSubmit={(e) => { e.preventDefault(); handleSendOTP(); }} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="sessionName">Session Name</Label>
+                  <Label className="font-bold text-center text-indigo-800" htmlFor="sessionName">Session Name</Label>
                   <Input
                     id="sessionName"
                     placeholder="Enter your session name"
+                    className='placeholder-black p-1 border text-black border-black'
                     value={sessionName}
                     onChange={(e) => setSessionName(e.target.value)}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label className="font-bold text-center text-indigo-800" htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
                     placeholder="Enter your password"
+                    className='placeholder-black p-1 border text-black border-black'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phoneNumber">Phone Number</Label>
+                  <Label className="font-bold text-center text-indigo-800" htmlFor="phoneNumber">Phone Number</Label>
                   <Input
                     id="phoneNumber"
                     type="tel"
                     placeholder="Enter your phone number"
+                    className='placeholder-black p-1 border text-black border-black'
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
@@ -146,10 +148,11 @@ export default function SignIn() {
             <form onSubmit={handleVerifyOTP} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="otp">Enter OTP</Label>
+                  <Label className="font-bold text-center text-indigo-800" htmlFor="otp">Enter OTP</Label>
                   <Input
                     id="otp"
                     type="text"
+                    className='placeholder-black p-1 border text-black border-black'
                     placeholder="Enter the OTP sent to your phone"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}

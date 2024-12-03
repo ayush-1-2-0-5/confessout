@@ -48,7 +48,7 @@ export async function sendOTP(phoneNumber: string): Promise<string> {
     await redis.set(`otp:${normalizedNumber}`, otp, { ex: 300 });
 
     await client.messages.create({
-      body: `Your OTP for confession access is: ${otp}`,
+      body: `Your OTP for accessing Confess Out is: ${otp}. Please note, this OTP is valid for only 5 minutes. If you did not request this OTP, please report it immediately by emailing us at {ayush2002agarwal@gmail.com}.`,
       from: twilioConfig.phoneNumber,
       to: twilioFormattedNumber,
     });
