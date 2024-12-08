@@ -113,7 +113,7 @@ export default function ConfessionPage() {
       <div className="w-full max-w-md space-y-8">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-indigo-800">Your Confession</h1>
-          <Button onClick={handleLogout} variant="outline">Logout</Button>
+          <Button className=" font-bold text-black" onClick={handleLogout} variant="outline">End Session</Button>
         </div>
         <ConfessionCard confession={confessionPages[currentPageIndex]} />
         <NavigationButtons
