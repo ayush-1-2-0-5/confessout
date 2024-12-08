@@ -49,14 +49,11 @@ export async function sendOTP(phoneNumber: string): Promise<string> {
     const normalizedNumber = normalizePhoneNumber(phoneNumber);
     const twilioFormattedNumber = formatPhoneNumberForTwilio(phoneNumber);
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-    // Store OTP in Redis with a TTL of 5 minutes
     await redis.set(`otp:${normalizedNumber}`, otp, { ex: 300 });
 
     if (twilioConfig.trialMode) {
       console.log(`Trial mode: OTP for ${twilioFormattedNumber} is ${otp}`);
     } else {
-      // Send SMS via Twilio
       await client.messages.create({
         body: `Your OTP for accessing Confess Out is: ${otp}.`,
         from: twilioConfig.phoneNumber,
