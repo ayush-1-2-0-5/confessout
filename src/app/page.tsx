@@ -1,9 +1,27 @@
 'use client';
+
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';
 import { ArrowRight, Lock, Mail, Clock } from 'lucide-react';
+
 export default function Home() {
+  useEffect(() => {
+    const warmupBackend = async () => {
+      try {
+        const response = await fetch('/api/warmup');
+        if (!response.ok) {
+          throw new Error('Warmup failed');
+        }
+        console.log('Backend warmed up successfully');
+      } catch (error) {
+        console.error('Error warming up backend:', error);
+      }
+    };
+    warmupBackend();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
       <header className="container mx-auto px-4 py-6 border-b border-purple-300">
@@ -77,3 +95,4 @@ export default function Home() {
     </div>
   );
 }
+
