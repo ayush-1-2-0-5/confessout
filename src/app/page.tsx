@@ -49,9 +49,11 @@ export default function Home() {
         <section className="text-center mb-16">
           <h1 className="text-5xl font-bold text-purple-900 mb-4">Welcome to Confess Out</h1>
           <p className="text-xl text-purple-700 mb-8">Because life is too short for hidden truths.</p>
+          <Link href="/createconfession">
           <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg">
             Start Confessing
           </Button>
+          </Link>
         </section>
         <section className="mb-16">
           <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">How It Works</h2>
@@ -82,9 +84,12 @@ export default function Home() {
         <section className="text-center">
           <h2 className="text-3xl font-semibold text-purple-800 mb-4">Ready to Confess?</h2>
           <p className="text-xl text-purple-700 mb-8">Take the first step towards honesty and healing.</p>
-          <Button className="bg-pink-500 hover:bg-pink-600 text-white items-center px-8 py-3 rounded-full text-lg">
-            Get Started <ArrowRight className="ml-8 items-center" />
-          </Button>
+          <Link href="/createconfession">
+              <Button className="bg-pink-500 hover:bg-pink-600 text-white items-center px-8 py-3 rounded-full text-lg">
+                Get Started <ArrowRight className="ml-8 items-center" />
+              </Button>
+            
+          </Link>
         </section>
       </main>
       <footer className="bg-purple-900 text-white py-8">
@@ -95,4 +100,3 @@ export default function Home() {
     </div>
   );
 }
-

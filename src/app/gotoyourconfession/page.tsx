@@ -96,7 +96,7 @@ export default function SignIn() {
         </CardHeader>
         <CardContent>
           {!otpSent ? (
-            // Step 1: Initial Form with Send OTP
+    
             <form onSubmit={(e) => { e.preventDefault(); handleSendOTP(); }} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
