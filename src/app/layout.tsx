@@ -1,4 +1,4 @@
-import { ToastProvider } from "../../components/ui/use-toast"
+import { ToastProvider } from "../../components/ui/use-toast";
 import './globals.css'
 import { SessionProvider } from 'next-auth/react';
 
