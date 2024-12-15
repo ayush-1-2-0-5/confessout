@@ -17,8 +17,31 @@ export default function SignIn() {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleSendOTP = async () => {
+  const handleAuthenticate = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsLoading(true);
+    setError('');
+    try {
+      const authResponse = await fetch('/api/authenticate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionName, password, phoneNumber }),
+      });
+
+      if (!authResponse.ok) {
+        throw new Error('No such confession exists');
+      }
+
+      // If authentication is successful, send OTP
+      await handleSendOTP();
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSendOTP = async () => {
     setError('');
     try {
       const response = await fetch('/api/send-otp', {
@@ -34,8 +57,6 @@ export default function SignIn() {
       setOtpSent(true);
     } catch (error) {
       setError('Error sending OTP. Please try again.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -52,16 +73,6 @@ export default function SignIn() {
       
       if (!otpResponse.ok) {
         throw new Error('Invalid OTP');
-      }
-
-      const authResponse = await fetch('/api/authenticate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionName, password, phoneNumber }),
-      });
-
-      if (!authResponse.ok) {
-        throw new Error('Authentication failed');
       }
 
       const sessionResponse = await fetch('/api/session', {
@@ -96,8 +107,7 @@ export default function SignIn() {
         </CardHeader>
         <CardContent>
           {!otpSent ? (
-    
-            <form onSubmit={(e) => { e.preventDefault(); handleSendOTP(); }} className="space-y-6">
+            <form onSubmit={handleAuthenticate} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label className="font-bold text-center text-indigo-800" htmlFor="sessionName">Session Name</Label>
@@ -140,11 +150,10 @@ export default function SignIn() {
                 className="w-full bg-indigo-600 hover:bg-indigo-700"
                 disabled={isLoading}
               >
-                {isLoading ? 'Sending OTP...' : 'Send OTP'}
+                {isLoading ? 'Authenticating...' : 'Authenticate'}
               </Button>
             </form>
           ) : (
-            // Step 2: OTP Verification Form
             <form onSubmit={handleVerifyOTP} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
