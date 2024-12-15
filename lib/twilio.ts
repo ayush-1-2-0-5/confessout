@@ -105,9 +105,8 @@
 //   }
 // }
 
-
 import { Redis } from '@upstash/redis';
-import * as unirest from 'unirest';
+import axios from 'axios';
 const fast2SMSConfig = {
   apiKey: process.env.FAST2SMS_API_KEY!,
   route: 'otp',
@@ -135,42 +134,31 @@ export async function sendOTP(phoneNumber: string): Promise<string> {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     console.log('Generated OTP:', otp);
     await redis.set(`otp:${normalizedNumber}`, otp, { ex: 300 });
-    const response = await new Promise<any>((resolve, reject) => {
-      const req = unirest.get('https://www.fast2sms.com/dev/bulkV2');
 
-      req.query({
+    const response = await axios.get('https://www.fast2sms.com/dev/bulkV2', {
+      params: {
         authorization: fast2SMSConfig.apiKey,
         variables_values: otp,
-        route: fast2SMSConfig.route, 
+        route: fast2SMSConfig.route,
         numbers: normalizedNumber,
-      });
-
-      req.headers({
+      },
+      headers: {
         'cache-control': 'no-cache',
-      });
-
-      req.end((res) => {
-        if (res.error) {
-          console.error('Fast2SMS Error:', res.error); 
-          console.error('Fast2SMS Response Body:', res.body);
-          reject(new Error(`Failed to send OTP: ${res.error}`));
-        } else {
-          console.log('Fast2SMS Response:', res.body);
-          resolve(res.body);
-        }
-      });
-      
+      },
     });
-    if (response && response.return) {
-      console.log('OTP sent successfully:', response);
+
+    if (response.data && response.data.return) {
+      console.log('OTP sent successfully:', response.data);
     } else {
-      console.error('Failed to send OTP:', response.message);
+      console.error('Failed to send OTP:', response.data.message);
       throw new Error('Failed to send OTP');
     }
     console.timeEnd('sendOTP Execution Time');
     return otp;
   } catch (error: unknown) {
-    if (error instanceof Error) { 
+    if (axios.isAxiosError(error)) {
+      console.error('Error sending OTP:', error.response?.data || error.message);
+    } else if (error instanceof Error) {
       console.error('Error sending OTP:', error.message);
     } else {
       console.error('Unknown error occurred');

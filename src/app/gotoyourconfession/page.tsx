@@ -31,8 +31,6 @@ export default function SignIn() {
       if (!authResponse.ok) {
         throw new Error('No such confession exists');
       }
-
-      // If authentication is successful, send OTP
       await handleSendOTP();
     } catch (error) {
       setError(error instanceof Error ? error.message : 'An unexpected error occurred');
@@ -53,7 +51,6 @@ export default function SignIn() {
       if (!response.ok) {
         throw new Error('Failed to send OTP');
       }
-
       setOtpSent(true);
     } catch (error) {
       setError('Error sending OTP. Please try again.');
