@@ -37,7 +37,7 @@ export default function WriteConfession() {
 
   const handleSubmit = async () => {
     const nonEmptyConfessions = confessions.filter((confession) => confession.trim() !== '');
-
+  
     if (nonEmptyConfessions.length === 0) {
       toast({
         title: 'Error',
@@ -46,28 +46,28 @@ export default function WriteConfession() {
       });
       return;
     }
-
+  
     try {
-      await Promise.all(
-        nonEmptyConfessions.map(async (confession, index) => {
-          const response = await fetch('/api/submit-confession', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sessionName, confession }),
-          });
-
-          if (!response.ok) {
-            throw new Error(`Failed to submit confession page ${index + 1}`);
-          }
-        })
-      );
-
+      for (let index = 0; index < nonEmptyConfessions.length; index++) {
+        const confession = nonEmptyConfessions[index];
+        const response = await fetch('/api/submit-confession', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionName, confession, pageNumber: index + 1 }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Failed to submit confession page ${index + 1}`);
+        }
+        console.log(`submitted ${index +1}`);
+      }
+  
       toast({
-        title: 'Success!',
+        title: 'All Done!',
         description: 'All confessions submitted successfully!',
         duration: 3000,
       });
-
+  
       setTimeout(() => router.push('/'), 3000);
     } catch (error) {
       console.error('Error:', error);
@@ -78,7 +78,7 @@ export default function WriteConfession() {
       });
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8 relative">
