@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: '"Chitthi" <noreply@confessionapp.com>',
       to: email,
-      subject: 'Your Confession Details',
+      subject: 'Your Chitthi Details',
       html: emailMessage,
     });
 
