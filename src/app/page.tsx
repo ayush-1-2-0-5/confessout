@@ -35,18 +35,18 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-3xl font-bold text-purple-800 hover:text-purple-600 transition-colors">
-            Confess Out
+            Chitthi
           </Link>
           <div className="flex space-x-6 items-center">
             <Link href="/about" className="text-purple-800 font-bold hover:text-purple-600 transition-colors">
               About
             </Link>
             <Link href="/why" className="text-purple-800 font-bold hover:text-purple-600 transition-colors">
-              Why Confess?
+              Why To Write?
             </Link>
             <Link href="/gotoyourconfession">
               <Button className="bg-purple-600 hover:bg-purple-700 text-white rounded-full transition-colors">
-                See Your Confession
+                See Your Chitthi
               </Button>
             </Link>
           </div>
@@ -55,11 +55,11 @@ export default function Home() {
 
       <main className="container mx-auto px-4 py-16">
         <motion.section className="text-center mb-16" {...fadeInUp}>
-          <h1 className="text-5xl font-bold text-purple-900 mb-4">Welcome to Confess Out</h1>
+          <h1 className="text-5xl font-bold text-purple-900 mb-4">Welcome to Chitthi</h1>
           <p className="text-xl text-purple-700 mb-8">Because life is too short for hidden truths.</p>
           <Link href="/createconfession">
             <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg transition-all transform hover:scale-105">
-              Start Confessing
+              Start Writing
             </Button>
           </Link>
         </motion.section>
@@ -68,9 +68,9 @@ export default function Home() {
           <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: Mail, title: "Anonymous Confession", description: "Send your confession anonymously by providing the recipient's email, name, and phone number." },
+              { icon: Mail, title: "Anonymous Chitthi Delivery", description: "Send your chitthi anonymously by providing the recipient's email, name, and phone number." },
               { icon: Lock, title: "Secure Delivery", description: "We encrypt all information and use secure algorithms to protect your privacy." },
-              { icon: Clock, title: "Timed Access", description: "Recipients can view the confession for a limited time set by the sender." }
+              { icon: Clock, title: "Timed Access", description: "Recipients can view the chitthi for a limited time set by the sender." }
             ].map((item, index) => (
               <motion.div key={index} variants={fadeInUp} transition={{ delay: index * 0.2 }}>
                 <Card className="p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
@@ -84,7 +84,7 @@ export default function Home() {
         </motion.section>
 
         <motion.section className="text-center mb-16" {...fadeInUp}>
-          <h2 className="text-3xl font-semibold text-purple-800 mb-4">Ready to Confess?</h2>
+          <h2 className="text-3xl font-semibold text-purple-800 mb-4">Ready to Write?</h2>
           <p className="text-xl text-purple-700 mb-8">Take the first step towards honesty and healing.</p>
           <Link href="/createconfession">
             <Button className="bg-pink-500 hover:bg-pink-600 text-white items-center px-8 py-3 rounded-full text-lg transition-all transform hover:scale-105">
@@ -94,7 +94,7 @@ export default function Home() {
         </motion.section>
 
         <motion.section className="mb-16" {...fadeInUp}>
-          <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">Why Choose Confess Out?</h2>
+          <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">Why Choose to Write?</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
               <h3 className="text-xl text-black font-semibold mb-2">Emotional Freedom</h3>
@@ -128,16 +128,16 @@ export default function Home() {
   <div className="container mx-auto px-4">
     <div className="grid md:grid-cols-4 gap-8">
       <div>
-        <h3 className="text-2xl font-bold mb-4 text-white">Confess Out</h3>
-        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous confessions.</p>
+        <h3 className="text-2xl font-bold mb-4 text-white">Chitthi</h3>
+        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous writing.</p>
       </div>
       <div>
         <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
         <ul className="space-y-2">
           <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-          <li><Link href="/why" className="hover:text-white transition-colors">Why Confess?</Link></li>
-          <li><Link href="/createconfession" className="hover:text-white transition-colors">Create Confession</Link></li>
-          <li><Link href="/gotoyourconfession" className="hover:text-white transition-colors">See Your Confession</Link></li>
+          <li><Link href="/why" className="hover:text-white transition-colors">Why Write?</Link></li>
+          <li><Link href="/createconfession" className="hover:text-white transition-colors">Create Chitthi</Link></li>
+          <li><Link href="/gotoyourconfession" className="hover:text-white transition-colors">See Your Chitthi</Link></li>
         </ul>
       </div>
       {/* <div>
@@ -162,7 +162,7 @@ export default function Home() {
       </div>
     </div>
     <div className="mt-8 pt-8 border-t border-purple-700 text-center text-purple-300">
-      <p>&copy; 2024 Confess Out. All rights reserved.</p>
+      <p>&copy; 2024 Chitthi. All rights reserved.</p>
     </div>
   </div>
 </footer>

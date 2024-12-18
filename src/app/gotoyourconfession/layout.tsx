@@ -1,4 +1,9 @@
 import "../../app/globals.css"
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'Authenticate Page',
+  description: 'Anonymous confessions for healing and growth',
+}
 export default function RootLayout({
   children,
 }: {

@@ -99,8 +99,8 @@ export default function SignIn() {
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-6">
       <Card className="w-full max-w-lg bg-white shadow-xl">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center text-indigo-800">Access Your Confession</CardTitle>
-          <CardDescription className="text-center text-indigo-700">Enter your credentials to view your confession</CardDescription>
+          <CardTitle className="text-3xl font-bold text-center text-indigo-800">Access Your Chitthi</CardTitle>
+          <CardDescription className="text-center text-indigo-700">Enter your credentials to view your chitthi</CardDescription>
         </CardHeader>
         <CardContent>
           {!otpSent ? (

@@ -1,7 +1,7 @@
-import "../../app/globals.css"
+import "../../../app/globals.css"
 import type { Metadata } from 'next'
 export const metadata: Metadata = {
-  title: 'Create Credentials',
+  title: 'Write Chitthi',
   description: 'Anonymous confessions for healing and growth',
 }
 export default function RootLayout({

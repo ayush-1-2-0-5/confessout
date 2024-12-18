@@ -40,7 +40,7 @@ export default function CreateConfession() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
-        <h1 className="text-2xl font-bold text-center text-indigo-800">Create New Confession</h1>
+        <h1 className="text-2xl font-bold text-center text-indigo-800">Create New Chitthi</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             type="text"

@@ -103,7 +103,7 @@ export default function ConfessionPage() {
     return null;
   }
   if (isLoading) {
-    return <div className="text-center py-12 text-indigo-700">Loading your confessions...</div>;
+    return <div className="text-center py-12 text-indigo-700">Loading your chitthiiiiiissssss...</div>;
   }
   if (error) {
     return <div className="text-center py-12 text-indigo-700">{error}</div>;
@@ -112,7 +112,7 @@ export default function ConfessionPage() {
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-indigo-800">Your Confession</h1>
+          <h1 className="text-2xl font-bold text-indigo-800">Your Chitthi</h1>
           <Button className=" font-bold text-black" onClick={handleLogout} variant="outline">End Session</Button>
         </div>
         <ConfessionCard confession={confessionPages[currentPageIndex]} />

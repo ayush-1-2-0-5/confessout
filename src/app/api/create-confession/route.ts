@@ -37,9 +37,9 @@ export async function POST(request: Request) {
     const seeconfessionLink = 'https://confessout.vercel.app/gotoyourconfession';
     const emailMessage = `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-        <h2 style="color: #4caf50;">You have a confession waiting for you!</h2>
+        <h2 style="color: #4caf50;">You have a chitthi waiting for you!</h2>
         <p>
-          Welcome to <strong>ConfessOut</strong>, the platform where you can share your thoughts and feelings without revealing your identity.
+          Welcome to <strong>Chitthi</strong>, the platform where you can share your thoughts and feelings without revealing your identity.
         </p>
         <h3>Here are your details:</h3>
         <ul>
@@ -48,14 +48,14 @@ export async function POST(request: Request) {
           <li><strong>Phone Number:</strong> ${phoneNumber}</li>
         </ul>
         <p>
-          Ready to see your confession? Click the link below:
+          Ready to see your chitthi? Click the link below:
         </p>
         <p>
-          <a href="${seeconfessionLink}" style="color: #1a73e8; font-weight: bold;">See Confession</a>
+          <a href="${seeconfessionLink}" style="color: #1a73e8; font-weight: bold;">See Your Chitthi</a>
         </p>
         <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
         <p style="color: #666; font-size: 14px;">
-          ConfessOut is a platform to share your thoughts with someone without revealing your identity.
+          Chitthi is a platform to share your thoughts with someone without revealing your identity.
         </p>
         <p>
           Try it out here: <a href="${websiteLink}" style="color: #1a73e8;">${websiteLink}</a>
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     `;
 
     await transporter.sendMail({
-      from: '"ConfessOut" <noreply@confessionapp.com>',
+      from: '"Chitthi" <noreply@confessionapp.com>',
       to: email,
       subject: 'Your Confession Details',
       html: emailMessage,

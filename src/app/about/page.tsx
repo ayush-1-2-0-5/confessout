@@ -17,14 +17,14 @@ export default function About() {
       <header className="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-3xl font-bold text-purple-800 hover:text-purple-600 transition-colors">
-            Confess Out
+            Chitthi
           </Link>
           <div className="flex space-x-6 items-center">
             <Link href="/" className="text-purple-800 font-bold hover:text-purple-600 transition-colors">
               Home
             </Link>
             <Link href="/why" className="text-purple-800 font-bold hover:text-purple-600 transition-colors">
-              Why Confess?
+              Why to Write?
             </Link>
           </div>
         </nav>
@@ -36,13 +36,13 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          About Confess Out
+          About Chitthi
         </motion.h1>
 
         <motion.section className="mb-12" {...fadeInUp}>
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            At ConfessOut, we believe in the power of honesty and the healing that comes from sharing our truths.
+            At Chitthi, we believe in the power of honesty and the healing that comes from sharing our truths.
             Our mission is to provide a safe, secure, and anonymous platform for people to express their deepest
             thoughts and confessions.
           </p>

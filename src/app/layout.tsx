@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 export const metadata: Metadata = {
-  title: 'Confess Out',
+  title: 'Chitthi',
   description: 'Anonymous confessions for healing and growth',
 }
 export default function RootLayout({ children }: { children: React.ReactNode }) {

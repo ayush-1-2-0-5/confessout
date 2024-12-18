@@ -64,7 +64,7 @@ export default function WriteConfession() {
           throw new Error(`Failed to submit confession page ${index + 1}`);
         }
 
-        await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 0.5 seconds
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
 
       setTimeout(() => router.push('/'), 1000);
@@ -83,11 +83,11 @@ export default function WriteConfession() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8 relative">
-        <h1 className="text-2xl font-bold text-center text-indigo-800">Write Your Confession</h1>
+        <h1 className="text-2xl font-bold text-center text-indigo-800">Write Your Chitthi</h1>
         <Card className="bg-yellow-100 h-[400px] shadow-lg relative">
           <CardContent className="p-6">
             <Textarea
-              placeholder="Write your confession here..."
+              placeholder="Write your content here..."
               value={confessions[currentPageIndex]}
               onChange={(e) => handleConfessionChange(e.target.value)}
               className="h-[360px] scrollbar-hide bg-transparent border-none resize-none focus:ring-0 text-indigo-900 text-lg font-handwriting leading-[2.5rem]"
