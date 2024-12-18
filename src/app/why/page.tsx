@@ -41,16 +41,16 @@ export default function WhyConfess() {
         </motion.h1>
 
         <motion.section className="mb-12" {...fadeInUp}>
-          <h2 className="text-2xl font-semibold text-purple-800 mb-4">The Power of Confession</h2>
+          <h2 className="text-2xl font-semibold text-purple-800 mb-4">The Power of Writing</h2>
           <p className="text-gray-700 mb-4">
-            Confession is a powerful act of self-reflection and honesty. It allows us to confront our deepest
+            Writing is a powerful act of self-reflection and honesty. It allows us to confront our deepest
             thoughts and feelings, and in doing so, find relief, healing, and personal growth. By sharing our
             truths, we open ourselves to understanding and connection, both with ourselves and others.
           </p>
         </motion.section>
 
         <motion.section className="mb-12" {...fadeInUp}>
-          <h2 className="text-2xl font-semibold text-purple-800 mb-4">Benefits of Confessing</h2>
+          <h2 className="text-2xl font-semibold text-purple-800 mb-4">Benefits of Writting</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { icon: Heart, title: "Emotional Release", description: "Unburden yourself from the weight of secrets and experience emotional freedom." },
@@ -77,7 +77,7 @@ export default function WhyConfess() {
           <p className="text-gray-700 mb-4">
             Rohan had always admired his father but had never expressed how much he appreciated him. Growing
             up, his father worked long hours to ensure Rohan had every opportunity to succeed. One day, Rohan
-            used Confess Out to write a heartfelt message to his father, thanking him for his sacrifices and
+            used Chitthi to write a heartfelt message to his father, thanking him for his sacrifices and
             guidance. When his father read the message, he was deeply moved. Their bond grew stronger, and it
             reminded Rohan of the importance of expressing gratitude. This simple confession created a memory
             they both cherished for years to come.
@@ -110,8 +110,8 @@ export default function WhyConfess() {
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">Take the First Step</h2>
           <p className="text-gray-700 mb-4">
             Whether you're seeking forgiveness, looking to unburden yourself, or simply want to share a truth
-            you've been holding onto, confession can be a powerful tool for personal growth and healing.
-            Confess Out provides you with a safe, anonymous platform to take that first step towards honesty
+            you've been holding onto,Chitthi can be a powerful tool for personal growth and healing.
+            Chitthi provides you with a safe, anonymous platform to take that first step towards honesty
             and self-discovery.
           </p>
         </motion.section>
@@ -124,7 +124,7 @@ export default function WhyConfess() {
         >
           <Link href="/createconfession">
             <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg transition-all transform hover:scale-105">
-              Start Your Confession
+              Write Your Chitthi
             </Button>
           </Link>
         </motion.div>
@@ -134,8 +134,8 @@ export default function WhyConfess() {
   <div className="container mx-auto px-4">
     <div className="grid md:grid-cols-4 gap-8">
       <div>
-        <h3 className="text-2xl font-bold mb-4 text-white">Confess Out</h3>
-        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous confessions.</p>
+        <h3 className="text-2xl font-bold mb-4 text-white">Chitthi</h3>
+        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous chitthi.</p>
       </div>
       <div>
         <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>

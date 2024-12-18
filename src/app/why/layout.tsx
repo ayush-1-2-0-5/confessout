@@ -1,5 +1,10 @@
 import "../../app/globals.css"
-
+import "../../app/globals.css"
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'Why to write',
+  description: 'Anonymous confessions for healing and growth',
+}
 export default function RootLayout({
     children,
   }: {

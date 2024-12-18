@@ -81,7 +81,7 @@ export default function About() {
         <motion.section className="mb-12" {...fadeInUp}>
           <h2 className="text-2xl font-semibold text-purple-800 mb-4">The Motivation Behind Confess Out</h2>
           <p className="text-gray-700 mb-4">
-            The idea for Confess Out was born from a personal experience. As the founder, I always struggled to express my gratitude and appreciation to those closest to me - my parents and friends. I realized that many people face the same challenge, often leaving important things unsaid.
+            The idea for Chitthi was born from a personal experience. As the person, I always struggled to express my gratitude and appreciation to those closest to me - my parents and friends. I realized that many people face the same challenge, often leaving important things unsaid.
           </p>
           <p className="text-gray-700 mb-4">
             One day, I decided to tell a friend of mine, thanking them for their unwavering support . The impact was profound. It strengthened our bond and made me realize the power of expressing our true feelings.
@@ -99,7 +99,7 @@ export default function About() {
         >
           <Link href="/createconfession">
             <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg transition-all transform hover:scale-105">
-              Start Your Confession
+              Write Your Chitthi
             </Button>
           </Link>
         </motion.div>
@@ -109,16 +109,16 @@ export default function About() {
   <div className="container mx-auto px-4">
     <div className="grid md:grid-cols-4 gap-8">
       <div>
-        <h3 className="text-2xl font-bold mb-4 text-white">Confess Out</h3>
-        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous confessions.</p>
+        <h3 className="text-2xl font-bold mb-4 text-white">Chitthi</h3>
+        <p className="text-sm text-purple-200">Empowering honesty and healing through anonymous chitthis.</p>
       </div>
       <div>
         <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
         <ul className="space-y-2">
           <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-          <li><Link href="/why" className="hover:text-white transition-colors">Why Confess?</Link></li>
-          <li><Link href="/createconfession" className="hover:text-white transition-colors">Create Confession</Link></li>
-          <li><Link href="/gotoyourconfession" className="hover:text-white transition-colors">See Your Confession</Link></li>
+          <li><Link href="/why" className="hover:text-white transition-colors">Why to Write?</Link></li>
+          <li><Link href="/createconfession" className="hover:text-white transition-colors">Create Chitthi</Link></li>
+          <li><Link href="/gotoyourconfession" className="hover:text-white transition-colors">See Your Chitthi</Link></li>
         </ul>
       </div>
       <div>
