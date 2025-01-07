@@ -17,7 +17,7 @@ export default function WhyConfess() {
       <header className="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-3xl font-bold text-purple-800 hover:text-purple-600 transition-colors">
-            Confess Out
+            Chitthi
           </Link>
           <div className="flex space-x-6 items-center">
             <Link href="/" className="text-purple-800 font-bold hover:text-purple-600 transition-colors">
@@ -37,7 +37,7 @@ export default function WhyConfess() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Why Confess?
+          Why Write?
         </motion.h1>
 
         <motion.section className="mb-12" {...fadeInUp}>
