@@ -77,7 +77,7 @@ export default function CreateConfession() {
                 <Loader2 className="h-6 w-6 animate-spin mt-2" />
               </div>
             ) : (
-              'Create Confession'
+              'Create Chitthi'
             )}
           </Button>
         </form>
