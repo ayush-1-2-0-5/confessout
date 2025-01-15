@@ -9,7 +9,6 @@ export const runtime = 'edge';
 
 export async function POST(req: Request) {
   try {
-    console.log(process.env.OPENAI_API_KEY)
     const { messages, tone, prompt } = await req.json();
     const formattedMessages = messages
       .map((message: { role: string; content: string }) => `${message.role}: ${message.content}`)
