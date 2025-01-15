@@ -151,6 +151,7 @@ export default function WriteConfession() {
     <option value="casual">Casual</option>
     <option value="friendly">Friendly</option>
     <option value="professional">Professional</option>
+    <option value="hindi">Hindi</option>
   </select>
 </div>
 
