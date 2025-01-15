@@ -100,7 +100,7 @@ export default function WriteConfession() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: [{ role: 'user', content: confessions[currentPageIndex] }],
+          messages: [{ role: 'system', content: confessions[currentPageIndex] }],
           tone,
           prompt: aiPrompt,
         }),
