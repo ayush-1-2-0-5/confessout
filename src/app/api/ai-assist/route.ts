@@ -12,11 +12,12 @@ export async function POST(req: Request) {
   try {
     const { messages, tone, prompt } = await req.json();
     const lastMessage = messages[messages.length - 1]?.content;
+
     if (!lastMessage) {
       return new Response('Invalid input: lastMessage is missing', { status: 400 });
     }
 
-    const response = await openai.createChatCompletion({
+    const openAiResponse = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       stream: true,
       messages: [
@@ -30,47 +31,50 @@ export async function POST(req: Request) {
       max_tokens: 2000,
     });
 
+    const reader = openAiResponse.body?.getReader();
+    const decoder = new TextDecoder();
+    let buffer = ''; // Buffer for incomplete JSON data
+
     const stream = new ReadableStream({
-      start(controller) {
-        const reader = response.body?.getReader();
-        const decoder = new TextDecoder();
-        let buffer = ''; // Buffer to hold incomplete JSON data
+      async pull(controller) {
+        if (!reader) {
+          controller.close();
+          return;
+        }
 
-        const processStream = async () => {
-          while (reader) {
-            const { done, value } = await reader.read();
-            if (done) break;
+        const { done, value } = await reader.read();
+        if (done) {
+          controller.close();
+          return;
+        }
 
-            buffer += decoder.decode(value, { stream: true }); // Append new data to buffer
-            const lines = buffer.split('\n'); // Split data into lines
+        // Decode the chunk into text and process
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop()!; // Save incomplete line back to buffer
 
-            buffer = lines.pop()!; // Save the last incomplete line back to the buffer
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6); // Remove "data: "
+            if (data === '[DONE]') {
+              controller.close();
+              return;
+            }
 
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6); // Remove "data: "
-                if (data === '[DONE]') {
-                  controller.close();
-                  return;
-                }
-                try {
-                  const json = JSON.parse(data); // Parse the complete JSON line
-                  const token = json.choices[0]?.delta?.content || '';
-                  if (token) {
-                    controller.enqueue(token);
-                  }
-                } catch (error) {
-                  console.error('Error parsing JSON:', error);
-                  // Ignore the malformed line and continue processing
-                }
+            try {
+              const json = JSON.parse(data);
+              const token = json.choices[0]?.delta?.content || '';
+              if (token) {
+                controller.enqueue(new TextEncoder().encode(token)); // Stream the token
               }
+            } catch (error) {
+              console.error('Error parsing JSON:', error);
             }
           }
-
-          controller.close();
-        };
-
-        processStream();
+        }
+      },
+      cancel() {
+        reader?.cancel();
       },
     });
 
