@@ -109,7 +109,7 @@ import { Redis } from '@upstash/redis';
 import axios from 'axios';
 const fast2SMSConfig = {
   apiKey: process.env.FAST2SMS_API_KEY!,
-  route: 'otp',
+  route: 'q',
 };
 
 const redis = new Redis({
