@@ -149,7 +149,7 @@ export default function Home() {
           <li><Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link></li>
         </ul>
       </div> */}
-      <div>
+      {/* <div>
         <h4 className="text-lg font-semibold mb-4 text-white">Connect</h4>
         <div className="flex space-x-4">
           <a href="https://github.com/ayush-1-2-0-5" target="_blank" rel="noopener noreferrer" className="text-purple-200 hover:text-white transition-colors">
@@ -159,7 +159,7 @@ export default function Home() {
             <Linkedin className="w-6 h-6" />
           </a>
         </div>
-      </div>
+      </div> */}
     </div>
     <div className="mt-8 pt-8 border-t border-purple-700 text-center text-purple-300">
       <p>&copy; 2024 Chitthi. All rights reserved.</p>
